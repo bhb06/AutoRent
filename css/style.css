@@ -1,0 +1,85 @@
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+background-color: rgb(202, 160, 104)
+}
+
+body {
+font-family: 'Segoe UI', sans-serif;
+background-color: #f7f7f7;
+color: #333;
+line-height: 1.6;
+}
+
+a {
+text-decoration: none;
+color: #0077cc;
+}
+
+section {
+padding: 40px 20px;
+max-width: 1200px;
+margin: auto;
+}
+
+.btn {
+display: inline-block;
+padding: 10px 20px;
+background-color: #0077cc;
+color: white;
+border-radius: 6px;
+transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+background-color: #005fa3;
+}
+
+.navbar {
+background-color: #fff;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 15px 40px;
+position: sticky;
+top: 0;
+z-index: 1000;
+}
+
+.logo {
+font-size: 1.5rem;
+font-weight: bold;
+}
+
+.navbar nav a {
+margin-left: 20px;
+font-weight: 500;
+color: #333;
+}
+
+.navbar nav a:hover {
+color: #0077cc;
+}
+
+.hero {
+background-image: url('../images/hero-car.jpg'); /* Add your hero image here */
+background-size: cover;
+background-position: center;
+color: white;
+text-align: center;
+padding: 120px 20px;
+}
+
+.hero h1 {
+font-size: 2.5rem;
+margin-bottom: 10px;
+}
+
+.hero p {
+font-size: 1.2rem;
+margin-bottom: 20px;
+}
+
+  
