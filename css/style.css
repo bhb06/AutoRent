@@ -2,8 +2,7 @@
 margin: 0;
 padding: 0;
 box-sizing: border-box;
-background-color: rgb(202, 160, 104)
-}
+background-color: #f2f2f2;}
 
 body {
 font-family: 'Segoe UI', sans-serif;
@@ -72,6 +71,8 @@ text-align: center;
 padding: 120px 20px;
 }
 
+
+
 .hero h1 {
 font-size: 2.5rem;
 margin-bottom: 10px;
@@ -82,4 +83,47 @@ font-size: 1.2rem;
 margin-bottom: 20px;
 }
 
+.featured-cars h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+  }
   
+  .car-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  
+  .car-card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    padding-bottom: 15px;
+    transition: transform 0.3s ease;
+  }
+  
+  .car-card:hover {
+    transform: scale(1.03);
+  }
+  
+  .car-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .car-card h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .car-card p {
+    font-size: 0.95rem;
+    color: #555;
+  }
+  
+
