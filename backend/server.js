@@ -26,6 +26,10 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(express.json());
 
+// Auth Routes
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+
 // Sample test route
 app.get('/', (req, res) => {
   res.send('🚀 Backend is running and connected to MongoDB!');
@@ -50,3 +54,12 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`🌐 Server running on port ${PORT}`);
 });
+
+const carGroupRoutes = require('./routes/carGroupRoutes');
+app.use('/api/cargroups', carGroupRoutes);
+
+const carRoutes = require('./routes/cars');
+app.use('/api/cars', carRoutes);
+
+const reservationRoutes = require('./routes/reservations');
+app.use('/api/reservations', reservationRoutes);
