@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Live Chat</title>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+  <style>
+    :root {
+      --primary: #4e8cff;
+      --secondary: #f1f1f1;
+      --user-bubble: #dcf8c6;
+      --agent-bubble: #e2e2e2;
+      --bg: #f9f9f9;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      width: 95%;
+      max-width: 600px;
+      height: 90vh;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-header {
+      padding: 16px;
+      background-color: var(--primary);
+      color: white;
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: var(--bg);
+    }
+
+    .message {
+      margin-bottom: 12px;
+      max-width: 70%;
+      padding: 10px 14px;
+      border-radius: 18px;
+      position: relative;
+      word-wrap: break-word;
+      line-height: 1.4;
+      font-size: 0.95rem;
+    }
+
+    .user {
+      background-color: var(--user-bubble);
+      align-self: flex-end;
+      margin-left: auto;
+      border-bottom-right-radius: 0;
+    }
+
+    .agent {
+      background-color: var(--agent-bubble);
+      align-self: flex-start;
+      margin-right: auto;
+      border-bottom-left-radius: 0;
+    }
+
+    .chat-input-area {
+      display: flex;
+      padding: 12px 16px;
+      background-color: #fff;
+      border-top: 1px solid #ddd;
+    }
+
+    .chat-input-area input {
+      flex: 1;
+      padding: 10px 16px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    .chat-input-area button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-left: 8px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    .chat-input-area button:hover {
+      background-color: #3c76dd;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">Live Chat Support</div>
+    <div class="chat-box" id="chat-box"></div>
+    <div class="chat-input-area">
+      <input id="message" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const socket = io('http://localhost:5000');
+
+    const username = localStorage.getItem('username') || 'User'; // simulate agent by changing this value manually
+    const chatBox = document.getElementById('chat-box');
+    const messageInput = document.getElementById('message');
+
+    function sendMessage() {
+      const message = messageInput.value.trim();
+      if (message) {
+        socket.emit('chatMessage', { sender: username, message });
+        messageInput.value = '';
+      }
+    }
+
+    // Enter to send
+    messageInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+
+    // Display messages
+    socket.on('chatMessage', (data) => {
+      const div = document.createElement('div');
+      div.classList.add('message');
+      div.classList.add(data.sender === username ? 'user' : 'agent');
+      div.textContent = `${data.sender}: ${data.message}`;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    });
+  </script>
+</body>
+</html>

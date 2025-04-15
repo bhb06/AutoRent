@@ -44,44 +44,59 @@
   </div>
 
   <script>
+    // Password toggle logic
     const toggle = document.getElementById('toggle-password');
     const password = document.getElementById('password');
     const openEye = document.getElementById('open-eye');
     const closedEye = document.getElementById('closed-eye');
-
+  
     toggle.addEventListener('click', () => {
       const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
       password.setAttribute('type', type);
       openEye.classList.toggle('hide');
       closedEye.classList.toggle('hide');
     });
-
+  
     // LOGIN LOGIC
-  const loginForm = document.getElementById('loginForm');
-
-loginForm.addEventListener('submit', function (e) {
-  e.preventDefault();
-
-  const enteredEmail = loginForm.email.value.trim();
-  const enteredPassword = loginForm.password.value.trim();
-
-  const savedUser = JSON.parse(localStorage.getItem("registeredUser"));
-
-  if (!savedUser) {
-    alert("No account found. Please sign up first.");
-    return;
-  }
-
-  if (enteredEmail === savedUser.email && enteredPassword === savedUser.password) {
-  // store session info
-    localStorage.setItem("loggedInUser", JSON.stringify(savedUser));
-    alert("Login successful!");
-    window.location.href = "index.html";
-  } else {
-    alert("Invalid email or password. Please try again.");
-  }
-});
-</script>
+    const loginForm = document.getElementById('loginForm');
+  
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+  
+      const enteredEmail = loginForm.email.value.trim();
+      const enteredPassword = loginForm.password.value.trim();
+  
+      const savedUser = JSON.parse(localStorage.getItem("registeredUser"));
+      const adminUser = JSON.parse(localStorage.getItem("adminAccount"));
+  
+      let account = null;
+  
+      // Check user and admin credentials
+      if (savedUser && enteredEmail === savedUser.email && enteredPassword === savedUser.password) {
+        account = savedUser;
+      } else if (adminUser && enteredEmail === adminUser.email && enteredPassword === adminUser.password) {
+        account = adminUser;
+      }
+  
+      // If match found
+      if (account) {
+        localStorage.setItem("loggedInUser", JSON.stringify(account));
+        localStorage.setItem("username", account.fullName);
+        localStorage.setItem("role", account.role);
+  
+        alert("Login successful!");
+  
+        if (account.role === 'admin') {
+          window.location.href = "admin-dashboard.html"; // Change if your admin page is different
+        } else {
+          window.location.href = "index.html";
+        }
+  
+      } else {
+        alert("Invalid email or password. Please try again.");
+      }
+    });
   </script>
+  
 </body>
 </html>

@@ -94,8 +94,10 @@
         email,
         phone,
         age,
-        password
+        password,
+        role: 'user' // always a user by default
       };
+
 
       localStorage.setItem("registeredUser", JSON.stringify(userData));
       alert("Account created successfully!");
