@@ -6,14 +6,16 @@ const reservationSchema = new mongoose.Schema({
     ref: 'User',
     required: true
   },
-  pickupLocation: {
-    type: String,
+  pickupBranch: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Branch',
     required: true
   },
-  dropLocation: {
-    type: String,
+  dropBranch: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Branch',
     required: true
-  },
+  },  
   pickupDate: {
     type: Date,
     required: true

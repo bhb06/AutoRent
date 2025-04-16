@@ -35,19 +35,26 @@ app.get('/', (req, res) => {
   res.send('🚀 Backend is running and connected to MongoDB!');
 });
 
-// === Real-time Chat Logic ===
 io.on('connection', (socket) => {
   console.log('✅ User connected:', socket.id);
 
-  socket.on('chatMessage', (msg) => {
-    console.log('💬 Message:', msg);
-    io.emit('chatMessage', msg); // broadcast to all connected clients
+  socket.on('chatMessage', async ({ sender, receiver, message }) => {
+    io.to(receiver).emit('chatMessage', { sender, message });
+
+    // ✅ Save the message to MongoDB
+    try {
+      const ChatMessage = require('./models/ChatMessage');
+      await ChatMessage.create({ sender, receiver, message });
+    } catch (err) {
+      console.error('Error saving message:', err.message);
+    }
   });
 
   socket.on('disconnect', () => {
     console.log('❌ User disconnected:', socket.id);
   });
 });
+
 
 // Server Listening
 const PORT = process.env.PORT || 5000;
@@ -63,3 +70,18 @@ app.use('/api/cars', carRoutes);
 
 const reservationRoutes = require('./routes/reservations');
 app.use('/api/reservations', reservationRoutes);
+
+const invoiceRoutes = require('./routes/invoices');
+app.use('/api/invoices', invoiceRoutes);
+
+const reviewRoutes = require('./routes/reviews');
+app.use('/api/reviews', reviewRoutes);
+
+const chatRoutes = require('./routes/chat');
+app.use('/api/chat', chatRoutes);
+
+const branchRoutes = require('./routes/branch');
+app.use('/api/branches', branchRoutes);
+
+const couponRoutes = require('./routes/coupons');
+app.use('/api/coupons', couponRoutes);

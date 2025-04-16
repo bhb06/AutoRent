@@ -1,5 +1,6 @@
 const Reservation = require('../models/Reservation');
 const Car = require('../models/Car');
+const Branch = require('../models/Branch');
 
 const SERVICE_FEES = {
   insurance: 50,
@@ -9,12 +10,12 @@ const SERVICE_FEES = {
   "extra driver": 30
 };
 
-// ✅ Create a reservation (user only, prevents overlapping)
+// ✅ Create a reservation (linked to branches and cars)
 exports.createReservation = async (req, res) => {
   try {
     const {
-      pickupLocation,
-      dropLocation,
+      pickupBranch,
+      dropBranch,
       pickupDate,
       dropDate,
       selectedCars,
@@ -26,14 +27,19 @@ exports.createReservation = async (req, res) => {
     const rentalDays = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
     if (rentalDays <= 0) return res.status(400).json({ message: 'Invalid date range' });
 
+    // Validate branches
+    const pickup = await Branch.findById(pickupBranch);
+    const drop = await Branch.findById(dropBranch);
+    if (!pickup || !drop) {
+      return res.status(400).json({ message: 'Invalid pickup or drop-off branch' });
+    }
+
+    // Check car availability
     for (let carId of selectedCars) {
       const conflict = await Reservation.findOne({
         selectedCars: carId,
         $or: [
-          {
-            pickupDate: { $lte: end },
-            dropDate: { $gte: start }
-          }
+          { pickupDate: { $lte: end }, dropDate: { $gte: start } }
         ]
       });
 
@@ -50,17 +56,16 @@ exports.createReservation = async (req, res) => {
     const totalPrice = carFees + serviceFee;
 
     const reservation = new Reservation({
-        userId: req.user._id,
-        pickupLocation,
-        dropLocation,
-        pickupDate: start,
-        dropDate: end,
-        selectedCars,
-        services,
-        status: 'reserved',
-        totalPrice
-      });
-      
+      userId: req.user._id,
+      pickupBranch,
+      dropBranch,
+      pickupDate: start,
+      dropDate: end,
+      selectedCars,
+      services,
+      status: 'reserved',
+      totalPrice
+    });
 
     await reservation.save();
     res.status(201).json({ message: 'Reservation created', data: reservation });
@@ -75,7 +80,9 @@ exports.getAllReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find()
       .populate('userId', 'username email')
-      .populate('selectedCars', 'brand model dailyFee');
+      .populate('selectedCars', 'brand model dailyFee')
+      .populate('pickupBranch', 'name address phone')
+      .populate('dropBranch', 'name address phone');
     res.status(200).json(reservations);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching reservations', error: error.message });
@@ -86,7 +93,9 @@ exports.getAllReservations = async (req, res) => {
 exports.getUserReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find({ userId: req.user._id })
-      .populate('selectedCars', 'brand model dailyFee');
+      .populate('selectedCars', 'brand model dailyFee')
+      .populate('pickupBranch', 'name address phone')
+      .populate('dropBranch', 'name address phone');
     res.status(200).json(reservations);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching reservations', error: error.message });
@@ -164,16 +173,16 @@ exports.updateReservationByUser = async (req, res) => {
     }
 
     const {
-      pickupLocation,
-      dropLocation,
+      pickupBranch,
+      dropBranch,
       pickupDate,
       dropDate,
       selectedCars,
       services
     } = req.body;
 
-    reservation.pickupLocation = pickupLocation || reservation.pickupLocation;
-    reservation.dropLocation = dropLocation || reservation.dropLocation;
+    reservation.pickupBranch = pickupBranch || reservation.pickupBranch;
+    reservation.dropLocation = dropBranch || reservation.dropBranch;
     reservation.pickupDate = pickupDate || reservation.pickupDate;
     reservation.dropDate = dropDate || reservation.dropDate;
     reservation.selectedCars = selectedCars || reservation.selectedCars;
