@@ -3,10 +3,12 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path'); 
 const connectDB = require('./config/db');
 
 // Load environment variables
-dotenv.config();
+dotenv.config({ path: __dirname + '/.env' });
+console.log('Loaded MONGO_URI:', process.env.MONGO_URI);
 
 // Connect to MongoDB
 connectDB();
@@ -29,6 +31,16 @@ app.use(express.json());
 // Auth Routes
 const authRoutes = require('./routes/auth');
 app.use('/api/auth', authRoutes);
+
+const userRoutes = require('./routes/users');
+app.use('/api/users', userRoutes);
+
+const uploadRoutes = require('./routes/upload');
+app.use('/api/upload', uploadRoutes);
+
+//  Serve static image files (e.g., /images/users/pic.jpg)
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+
 
 // Sample test route
 app.get('/', (req, res) => {
