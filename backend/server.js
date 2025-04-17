@@ -7,7 +7,7 @@ const path = require('path');
 const connectDB = require('./config/db');
 
 // Load environment variables
-dotenv.config({ path: __dirname + '/.env' });
+dotenv.config();
 console.log('Loaded MONGO_URI:', process.env.MONGO_URI);
 
 // Connect to MongoDB
