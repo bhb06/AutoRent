@@ -1,0 +1,361 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* --- General Container --- */
+.view-all-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px; /* Adjust padding for smaller screens */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    flex-direction: row; /* Default to row for larger screens */
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background-image: url('../images/footer-background.jpg'); /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 80px 0;
+    text-align: left;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px; /* Adjust padding */
+}
+
+.hero-content h1 {
+    font-size: 2.5em; /* Adjust font size */
+    margin-bottom: 8px;
+}
+
+.hero-content .breadcrumb {
+    font-size: 0.85em; /* Adjust font size */
+    color: #eee; /* Light color for breadcrumb */
+}
+
+.hero-content .breadcrumb a {
+    color: white;
+    text-decoration: none;
+}
+
+.hero-content .breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* --- Filter Sidebar --- */
+.filter-sidebar {
+    width: 250px; /* Default sidebar width */
+    padding: 15px; /* Adjust padding */
+    border: 1px solid #eee;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.filter-sidebar h2 {
+    font-size: 1.3em; /* Adjust font size */
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.filter-group {
+    margin-bottom: 15px; /* Adjust margin */
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-weight: bold;
+    font-size: 0.85em; /* Adjust font size */
+    color: #555;
+}
+
+.filter-group input[type="text"],
+.filter-group select {
+    width: 100%;
+    padding: 6px; /* Adjust padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.85em; /* Adjust font size */
+}
+
+.filter-group input[type="number"] {
+    width: 100%;
+    padding: 6px; /* Adjust padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 0.85em; /* Adjust font size */
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Other browsers */
+}
+
+/* Style specifically for the year input to remove default number input arrows */
+.filter-group label[for="year"] + input[type="number"]::-webkit-outer-spin-button,
+.filter-group label[for="year"] + input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.filter-button {
+    background-color: #007bff; /* Use your primary button color */
+    color: white;
+    border: none;
+    padding: 10px 15px; /* Adjust padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9em; /* Adjust font size */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make it full width of the sidebar */
+    margin-top: 15px; /* Adjust margin */
+    box-sizing: border-box; /* Ensure padding doesn't increase the width */
+}
+
+.filter-button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+/* --- Car Listing Section --- */
+.car-listing-section {
+    flex-grow: 1;
+}
+
+.listing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px; /* Adjust margin */
+    padding: 8px; /* Adjust padding */
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9em; /* Adjust font size */
+}
+
+.grid-icon i {
+    font-size: 1em; /* Adjust icon size */
+    color: #777;
+    cursor: pointer;
+}
+
+.sort-options label,
+.sort-options select {
+    margin-left: 8px; /* Adjust margin */
+    font-size: 0.8em; /* Adjust font size */
+}
+
+/* --- Car Grid --- */
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust minmax for smaller cards */
+    gap: 15px; /* Adjust gap */
+}
+
+.car-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px; /* Adjust padding */
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smoother transition */
+}
+
+.car-card:hover {
+    transform: scale(1.03); /* Slightly increase the size */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Less intense shadow */
+}
+
+.car-card img {
+    max-width: 100%; /* Ensure image doesn't exceed container width */
+    height: auto;      /* Maintain aspect ratio */
+    max-height: 150px; /* Adjust max height for smaller containers */
+    object-fit: cover; /* Crop or scale the image to fit the container */
+    width: 100%;      /* Make the image take full width of its container */
+    border-radius: 4px;
+    margin-bottom: 8px; /* Adjust margin */
+}
+
+.car-card h3 {
+    margin-top: 0;
+    margin-bottom: 3px;
+    font-size: 1em; /* Adjust font size */
+}
+
+.car-card .car-details {
+    font-size: 0.8em; /* Adjust font size */
+    color: #777;
+    margin-bottom: 6px; /* Adjust margin */
+}
+
+.car-card button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Adjust padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.8em; /* Adjust font size */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.car-card button:hover {
+    background-color: #0056b3;
+}
+
+/* --- Image Slider --- */
+.image-slider {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 8px; /* Adjust margin */
+    border-radius: 4px;
+}
+
+.slide {
+    display: none;
+}
+
+.slide img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 150px; /* Adjust max height */
+    object-fit: cover;
+}
+
+.image-slider .prev-btn,
+.image-slider .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 6px 10px; /* Adjust padding */
+    cursor: pointer;
+    z-index: 10;
+    font-size: 1em; /* Adjust font size */
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.image-slider:hover .prev-btn,
+.image-slider:hover .next-btn {
+    opacity: 1;
+}
+
+.image-slider .prev-btn {
+    left: 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.image-slider .next-btn {
+    right: 0;
+    border-radius: 4px 0 0 4px;
+}
+
+/* --- Media Queries for Tablet Screens (max-width: 768px) --- */
+@media (max-width: 768px) {
+    .view-all-container {
+        flex-direction: column; /* Stack sidebar and content */
+    }
+
+    .filter-sidebar {
+        width: 100%; /* Make sidebar full width */
+        margin-bottom: 20px;
+        /* You might want to add a toggle button to show/hide the sidebar on smaller screens */
+    }
+}
+
+/* --- Media Queries for Mobile Screens (max-width: 480px) --- */
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2em; /* Further adjust font size */
+    }
+
+    .car-grid {
+        grid-template-columns: 1fr; /* Single column for mobile */
+    }
+
+    .listing-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .sort-options {
+        margin-top: 10px;
+    }
+
+    .sort-options label,
+    .sort-options select {
+        margin-left: 0;
+        margin-right: 10px;
+    }
+}
+
+.car-details-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1001; /* Ensure it's above other elements */
+    border-radius: 5px;
+    text-align: left;
+    min-width: 300px;
+}
+
+.car-details-popup h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.car-details-popup p {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.car-details-popup strong {
+    font-weight: bold;
+}
+
+.car-details-popup .close-popup {
+    background-color: #dc3545; /* Red color for close button */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    display: block;
+    margin-top: 20px;
+    margin-left: auto; /* Align to the right */
+}
+
+.car-details-popup .close-popup:hover {
+    background-color: #c82333;
+}

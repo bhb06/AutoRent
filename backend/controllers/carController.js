@@ -1,36 +1,72 @@
+const mongoose = require('mongoose');
 const Car = require('../models/Car');
 const CarGroup = require('../models/CarGroup');
+const ObjectId = mongoose.Types.ObjectId;
 
-// CREATE a new car (admin only)
+// ✅ Create a car
 exports.createCar = async (req, res) => {
   try {
-    // Step 1: Create and save the car
-    const newCar = new Car(req.body);
+    const {
+      groupId,
+      brand,
+      model,
+      year,
+      dailyFee,
+      plateNumber,
+      availability
+    } = req.body;
+
+    if (!req.file) {
+      return res.status(400).json({ message: 'Image file is required' });
+    }
+
+    const imagePath = `/images/cars/${req.file.filename}`;
+
+    const newCar = new Car({
+      groupId,
+      brand,
+      model,
+      year: parseInt(year),
+      dailyFee: parseFloat(dailyFee),
+      image: imagePath,
+      plateNumber,
+      availability: availability === 'true'
+    });
+
     await newCar.save();
 
-    // Step 2: Add the car to its CarGroup's cars[] array
     await CarGroup.findByIdAndUpdate(
-      newCar.groupId,
+      groupId,
       { $push: { cars: newCar._id } },
       { new: true }
     );
 
-    // Step 3: Respond
-    res.status(201).json({ message: "Car created and added to group", data: newCar });
+    res.status(201).json({
+      message: '✅ Car created and added to group',
+      data: newCar
+    });
 
   } catch (error) {
-    res.status(500).json({ message: "Error creating car", error: error.message });
+    console.error('❌ Error creating car:', error);
+    res.status(500).json({
+      message: 'Error creating car',
+      error: error.message
+    });
   }
 };
 
-// GET all cars (with optional group filter)
+// ✅ Get all cars (with optional group filter)
 exports.getAllCars = async (req, res) => {
   try {
     const filter = {};
 
-    // Optional filter by group ID or group name
     if (req.query.groupId) {
-      filter.groupId = req.query.groupId;
+      try {
+        filter.groupId = req.query.groupId;
+      } catch (error) {
+        console.error("Invalid ObjectId format:", req.query.groupId);
+        return res.status(400).json({ message: "Invalid groupId format" });
+      }
     }
 
     const cars = await Car.find(filter).populate('groupId', 'groupName');
@@ -40,18 +76,35 @@ exports.getAllCars = async (req, res) => {
   }
 };
 
-// GET single car by ID
+// ✅ Get single car by ID (merges missing fields from CarGroup)
 exports.getCarById = async (req, res) => {
   try {
-    const car = await Car.findById(req.params.id).populate('groupId', 'groupName');
-    if (!car) return res.status(404).json({ message: "Car not found" });
-    res.status(200).json(car);
+    const car = await Car.findById(req.params.id).lean();
+    if (!car) return res.status(404).json({ message: 'Car not found' });
+
+    let group = null;
+    if (car.groupId) {
+      group = await CarGroup.findById(car.groupId).lean();
+    }
+
+    const mergedCar = {
+      ...car,
+      engineSize: car.engineSize ?? group?.engineSize ?? null,
+      passengers: car.passengers ?? group?.passengers ?? null,
+      numDoors: car.numDoors ?? group?.numDoors ?? null,
+      gearbox: car.gearbox ?? group?.gearbox ?? null,
+      fuelType: car.fuelType ?? group?.fuelType ?? null,
+      ac: car.ac ?? group?.ac ?? false,
+      electricWindows: car.electricWindows ?? group?.electricWindows ?? false
+    };
+
+    res.status(200).json(mergedCar);
   } catch (error) {
-    res.status(500).json({ message: "Error fetching car", error: error.message });
+    res.status(500).json({ message: 'Error fetching car', error: error.message });
   }
 };
 
-// UPDATE car
+// ✅ Update car
 exports.updateCar = async (req, res) => {
   try {
     const updated = await Car.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -62,28 +115,23 @@ exports.updateCar = async (req, res) => {
   }
 };
 
-// DELETE car and remove it from the group
+// ✅ Delete car and remove from CarGroup
 exports.deleteCar = async (req, res) => {
   try {
     const car = await Car.findById(req.params.id);
-
     if (!car) {
       return res.status(404).json({ message: "Car not found" });
     }
 
-    // Step 1: Delete the car
     await Car.findByIdAndDelete(req.params.id);
 
-    // Step 2: Remove car ID from the group's cars[] array
     await CarGroup.findByIdAndUpdate(
       car.groupId,
       { $pull: { cars: car._id } }
     );
 
     res.status(200).json({ message: "Car deleted and removed from group" });
-
   } catch (error) {
     res.status(500).json({ message: "Error deleting car", error: error.message });
   }
 };
-

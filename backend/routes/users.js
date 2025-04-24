@@ -1,65 +1,31 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/User'); // Adjust the path if your model is located elsewhere
+const { protect } = require('../middleware/authMiddleware'); // Protect route middleware
+const {
+  updateUserProfile,  // Controller for updating user profile
+  getCurrentBookings, // Controller to fetch active reservations
+  getBookingHistory,  // Controller to fetch booking history
+} = require('../controllers/authController');
 
-// ✅ PATCH /api/users/update-profile-image
-router.patch('/update-profile-image', async (req, res) => {
+// ✅ Get user profile (fetch)
+router.get('/:userId', protect, async (req, res) => {
   try {
-    const { userId, imagePath } = req.body;
+    const user = await User.findById(req.params.userId);
+    if (!user) return res.status(404).json({ message: 'User not found' });
 
-    if (!userId || !imagePath) {
-      return res.status(400).json({ msg: 'userId and imagePath are required' });
-    }
-
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ msg: 'User not found' });
-    }
-
-    user.profileImage = imagePath;
-    await user.save();
-
-    res.json({
-      msg: '✅ Profile image updated',
-      profileImage: user.profileImage,
-    });
-  } catch (err) {
-    res.status(500).json({
-      msg: '❌ Error updating profile image',
-      error: err.message,
-    });
+    res.status(200).json(user); // Send back user data
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching user data', error: error.message });
   }
 });
 
-exports.createUser = async (req, res) => {
-  try {
-    const { username, email, password, phone, age, role } = req.body;
+// ✅ Update user profile
+router.patch('/update-profile', protect, updateUserProfile);
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ message: "User already exists" });
+// ✅ Get current bookings (active reservations)
+router.get('/current-bookings', protect, getCurrentBookings);
 
-    // Create a new user
-    const newUser = new User({
-      username,
-      email,
-      password, // Ensure you hash the password
-      phone,
-      age,
-      role
-    });
+// ✅ Get booking history (completed/canceled reservations)
+router.get('/booking-history', protect, getBookingHistory);
 
-    await newUser.save();
-
-    res.status(201).json({
-      message: 'User created successfully',
-      user: newUser
-    });
-  } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
-  }
-};
-
-
-// ✅ Export the router (IMPORTANT!)
 module.exports = router;

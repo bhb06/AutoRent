@@ -1,0 +1,495 @@
+/* Hero Section */
+.about-us-hero {
+    background-image: url('../images/footer-background.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 150px 0;
+    text-align: center;
+}
+
+.about-us-hero .hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 10px;
+}
+
+.about-us-hero .breadcrumb {
+    font-size: 1em;
+}
+
+.about-us-hero .breadcrumb a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.about-us-hero .breadcrumb span {
+    color: #fff;
+}
+
+/* Welcome Section */
+.welcome-section {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.welcome-section .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.welcome-section .section-title small {
+    color: var(--primary-color, #007bff); /* Fallback to blue if variable not defined */
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.welcome-section .section-title h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.stats-grid {
+    display: flex; /* Use flexbox to arrange items horizontally */
+    justify-content: space-around; /* Distribute space evenly around items */
+    align-items: center; /* Vertically align items in the center */
+    margin-bottom: 20px;
+    margin-top: 50px; /* Add some space above the section */
+    padding: 20px; /* Add some padding around the grid */
+    background-color: #fff; 
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item i {
+    font-size: 2.5em;
+    color: var(--secondary-color, #007bff);
+    margin-bottom: 10px; /* Reduced margin */
+}
+
+.stat-item .number {
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px; /* Reduced margin */
+}
+
+.stat-item .label {
+    color: #777;
+    font-size: 0.9em;
+}
+
+.welcome-section .contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.welcome-section .contact-buttons a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.welcome-section .contact-buttons .question-button {
+    background-color: var(--accent-color, #ffc107); /* Fallback to yellow */
+    color: #fff;
+}
+
+.welcome-section .contact-buttons .question-button:hover {
+    background-color: var(--primary-color, #eab106);
+}
+
+.welcome-section .contact-buttons .call-button {
+    background-color: #eee;
+    color: var(--primary-color, #007bff);
+    border: 1px solid var(--primary-color, #007bff);
+}
+
+.welcome-section .contact-buttons .call-button:hover {
+    background-color: var(--primary-color, #007bff);
+    color: #fff;
+}
+
+/* Our Story Section */
+.our-story-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.our-story-section .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 50px;
+}
+
+.our-story-section .section-title {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.our-story-section .section-title h2 {
+    font-size: 2.5em;
+}
+
+.our-story-section .story-image {
+    flex: 1 1 400px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.our-story-section .story-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.our-story-section .story-text {
+    flex: 1 1 500px;
+}
+
+.our-story-section .story-text h3 {
+    font-size: 2em;
+    color: var(--primary-color, #007bff);
+    margin-bottom: 15px;
+}
+
+.our-story-section .story-text p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.our-story-section .story-text .learn-more-button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: var(--primary-color, #007bff);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.our-story-section .story-text .learn-more-button:hover {
+    background-color: darken(var(--primary-color, #007bff), 10%);
+}
+
+/* Our Team Section */
+.our-team-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.our-team-section .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.our-team-section .section-title {
+    margin-bottom: 50px;
+}
+
+.our-team-section .section-title h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.our-team-section .section-title p {
+    color: #777;
+}
+
+.our-team-section .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.our-team-section .team-member {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.our-team-section .team-member img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px 8px 0 0;
+    object-fit: cover; /* Ensure images fill the container without distortion */
+    aspect-ratio: 1/1; /* Maintain a square aspect ratio */
+}
+
+.our-team-section .team-member h3 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    color: var(--primary-color, #007bff);
+}
+
+.our-team-section .team-member span {
+    display: block;
+    color: #777;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.team-member a {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 14px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .team-member a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  .team-member span {
+    display: block;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+
+/* Why Choose Us Section */
+.why-choose-us-section {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.why-choose-us-section .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.why-choose-us-section .section-title {
+    margin-bottom: 50px;
+}
+
+.why-choose-us-section .section-title h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.why-choose-us-section .section-title p {
+    color: #777;
+}
+
+.why-choose-us-section .reasons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.why-choose-us-section .reason-item {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.why-choose-us-section .reason-item i {
+    font-size: 2em;
+    color: var(--primary-color, #007bff);
+    margin-bottom: 15px;
+}
+
+.why-choose-us-section .reason-item h3 {
+    font-size: 1.3em;
+    color: var(--secondary-color, #28a745);
+    margin-bottom: 10px;
+}
+
+.why-choose-us-section .reason-item p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 80px 0;
+    background-color: #eee;
+    text-align: center;
+}
+
+.testimonials-section .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.testimonials-section .section-title {
+    margin-bottom: 40px;
+}
+
+.testimonials-section .section-title h2 {
+    font-size: 2.5em;
+}
+
+.testimonials-section .testimonials-carousel {
+    overflow: hidden;
+}
+
+.testimonials-section .testimonial-slide {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; /* Add margin between slides if not using a carousel library */
+}
+
+.testimonials-section .testimonial-slide p {
+    color: #555;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.testimonials-section .testimonial-slide span {
+    display: block;
+    font-weight: bold;
+    color: var(--primary-color, #007bff);
+}
+
+/* Contact Us Section */
+.contact-us-section {
+    padding: 80px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.contact-us-section .container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contact-us-section .section-title {
+    margin-bottom: 40px;
+}
+
+.contact-us-section .section-title h2 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.contact-us-section .section-title p {
+    color: #777;
+}
+
+.contact-us-section .contact-form {
+    margin-top: 30px;
+}
+
+.contact-us-section .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-us-section .form-group input[type="text"],
+.contact-us-section .form-group input[type="email"],
+.contact-us-section .form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.contact-us-section .form-group textarea {
+    min-height: 150px;
+}
+
+.contact-us-section .submit-button {
+    background-color: var(--primary-color, #007bff);
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-us-section .submit-button:hover {
+    background-color: #0069d9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-us-hero {
+        padding: 100px 0;
+    }
+
+    .about-us-hero .hero-content h1 {
+        font-size: 2.5em;
+    }
+
+    .stats-grid {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        gap: 20px; /* Add some gap between stacked items */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .stat-item {
+        margin-bottom: 10px; /* Add margin between stacked stat items */
+    }
+
+    .welcome-section .contact-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .our-story-section .container {
+        flex-direction: column;
+    }
+
+    .our-story-section .story-image {
+        width: 80%;
+        margin: 0 auto 30px;
+    }
+
+    .our-team-section .team-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .why-choose-us-section .reasons-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,844 @@
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif; 
+    line-height: 1.6;
+}
+
+/* Hero Section Styling */
+.hero {
+    background-color: #f8f8f8; /* Light grey background */
+    position: relative;
+    margin-top: 70px; /* Adjust for navbar height */
+    overflow: hidden; /* Clip image slider */
+    padding-bottom: 100px; /* Space for thumbnails */
+    margin-top: 0px;
+}
+
+.hero-image-slider {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+}
+
+.hero-image-slider .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+}
+
+.hero-image-slider .slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.hero-image-slider img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-image-slider img.active {
+    opacity: 1;
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #333; /* Dark text */
+    z-index: 10;
+}
+
+.hero-content .rent-dream {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    background-color: rgba(248, 215, 218, 0.5);
+    border-radius: 5px;
+}
+
+.hero-content .car-model {
+    font-size: 3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    background-color: rgba(248, 215, 218, 0.5);
+    border-radius: 5px;
+}
+
+.hero-content .price {
+    font-size: 1.8em;
+    color: #ff0000;
+    margin-bottom: 20px;
+    background-color: #f8d7da; /* Light red background for price */
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.button.order-now {
+    background-color: #ff6b6b; /* warm red */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+.hero-buttons a.order-now {
+    background-color: #ff0000;
+}
+
+.hero-buttons a.test-drive {
+    background-color: #333; /* Dark button for test drive */
+}
+
+/* Car Categories Section - Updated */
+.car-categories {
+    background-color: #fff;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.offers-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    padding: 20px;
+}
+
+.slide-container {
+    /* Remove flex properties as we are using grid now */
+    width: 100%; /* Occupy full width of the grid cell */
+}
+
+.slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    background-color: #f9f9f9; /* Optional: Background for each category */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.slide:hover {
+    transform: scale(1.03);
+}
+
+.slide img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.category-name {
+    color: #333;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+/* Hide the slider arrows */
+.slider-arrow {
+    display: none;
+}
+
+.view-all-container {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.view-all-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-all-button:hover {
+    background-color: #0056b3;
+}
+/* Responsive adjustments for the slider */
+@media (max-width: 768px) {
+    .slide-container {
+        width: 120px; /* Adjust for smaller screens */
+    }
+
+    .slider-arrow {
+        font-size: 1.2em;
+        left: -5px;
+        right: -5px;
+    }
+}
+.featured-offer {
+    display: flex; /* Use Flexbox to arrange items side by side */
+    justify-content: space-between; /* Distribute space between details and image */
+    align-items: center; /* Vertically align items in the center */
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-top: 20px; /* Add some space between the slider and featured offer */
+}
+
+.offer-details {
+    flex: 1; /* Allow details to take up available space */
+    text-align: left;
+    margin-right: 30px; /* Add some spacing between details and image */
+}
+
+.offer-model {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.offer-price {
+    color: #f00; /* Red price */
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.offer-description {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.offer-specs {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    color: #777;
+}
+
+.offer-specs li {
+    margin-bottom: 5px;
+}
+
+.view-offer-button {
+    background-color: #f00; /* Red button */
+    color: white;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    display: inline-block; /* To control padding and margin */
+}
+
+.offer-image {
+    flex-shrink: 0; /* Prevent image from shrinking too much */
+    width: 400px; /* Adjust image width as needed */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.offer-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Hide arrows if there's not enough content to scroll */
+.offers-slider:not(:hover) .slider-arrow {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.offers-slider:hover .slider-arrow {
+    opacity: 1;
+}
+
+/* Featured Offer (Responsive - Keep this) */
+@media (max-width: 768px) {
+    .featured-offer {
+        flex-direction: column; /* Stack details and image on smaller screens */
+        text-align: center;
+    }
+
+    .offer-details {
+        margin-right: 0;
+        margin-bottom: 20px;
+        text-align: center; /* Center text on smaller screens */
+    }
+
+    .offer-image {
+        width: 100%;
+    }
+}
+
+/* === Most Wanted Cars Section === */
+.most-wanted-cars {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  
+  .section-title {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 30px;
+  }
+  
+  .most-wanted-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Shared styling for car card and average fee box */
+  .car-card,
+  .average-fee-box {
+    flex: 1 1 300px;
+    min-width: 280px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Specific to average fee box */
+  .fee-icon {
+    width: 85%;
+    height: 80%;
+    margin: 0 auto 10px;
+  }
+  
+  .average-fee-box h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  #averageDailyFee {
+    font-size: 1.7rem;
+    color: #007BFF;
+    font-weight: 600;
+  }
+  
+  /* Specific to car card */
+  .car-card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+  
+  .car-model {
+    color: #333;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+  }
+  
+  .car-price {
+    color: #007bff;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .most-popular-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8em;
+    z-index: 1;
+  }
+  
+  /* Buttons inside card */
+  .car-card .button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    text-decoration: none;
+    margin: 5px 0;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .car-card .button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .car-card,
+    .average-fee-box {
+      width: 90%;
+      margin-bottom: 20px;
+    }
+  }
+  
+/* Info, Research, Showroom Section */
+.info-research-showroom {
+    background-image: url("../images/footer-background.jpg"); /* Dark background, similar to the footer */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #ddd;
+    padding: 40px 20px;
+}
+
+.info-research-wrapper {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px; /* Optional:  Match footer's max-width */
+    margin: 0 auto;    /* Optional: Center on larger screens */
+    flex-wrap: wrap;   /* Allow columns to wrap on smaller screens */
+}
+
+.info-column,
+.research-column,
+.showroom-column {
+    width: 30%;       /* Roughly equal width for the columns */
+    padding: 0 10px;  /* Add some horizontal padding within columns */
+}
+
+.info-column h3,
+.research-column h3,
+.showroom-column h3 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #555; /* Add a subtle underline */
+    padding-bottom: 5px;
+}
+
+.info-column ul,
+.research-column ul,
+.showroom-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-column li,
+.research-column li,
+.showroom-column li {
+    margin-bottom: 10px;
+}
+
+.info-column a,
+.research-column a,
+.showroom-column a {
+    color: #ddd;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.info-column a:hover,
+.research-column a:hover,
+.showroom-column a:hover {
+    color: #fff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .info-column,
+    .research-column,
+    .showroom-column {
+        width: 100%; /* Full width on smaller screens */
+        margin-bottom: 20px; /* Add spacing between columns */
+    }
+
+    .info-research-wrapper {
+        flex-direction: column; /* Stack columns vertically */
+    }
+}
+.reviews-section {
+    padding: 40px 20px; /* Adjust padding as needed */
+    text-align: center;
+    position: relative;
+    background-color: #f9f9f9; /* Example background */
+}
+.reviews-carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.reviews-carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+}
+
+.review-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    min-width: 300px;
+    max-width: 320px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    border: 1px solid #eee;
+  }
+  
+  .review-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .review-user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ccc;
+    object-fit: cover;
+  }
+  
+  .review-user-info {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+  }
+  
+  .review-user-info strong {
+    font-weight: 600;
+  }
+  
+  .review-date {
+    font-size: 0.75rem;
+    color: #999;
+  }
+  
+  .review-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .rating {
+    color: #ffc107;
+    font-size: 1rem;
+  }
+  
+  .review-text {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+  
+
+.review-card:last-child {
+    margin-right: 0;
+}
+
+.review-card h4 {
+    margin-top: 0;
+    color: #333;
+}
+
+.review-card p {
+    color: #666;
+}
+
+.carousel-navigation button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    padding: 10px;
+    outline: none;
+}
+
+.carousel-navigation .prev-review {
+    left: 10px;
+}
+
+.carousel-navigation .next-review {
+    right: 10px;
+}
+
+.add-review-button {
+    font-family: 'Montserrat', 'sans-serif';
+    display: inline-block;
+    background-color: #007bff; 
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 14px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-review-button:hover {
+    background-color: #0056b3;
+}
+
+/* Modal styles (if not already defined) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* Star rating styles */
+.star-rating {
+    font-size: 24px;
+}
+
+.star {
+    color: #ccc; /* Default color of unselected stars */
+    cursor: pointer;
+    display: inline-block; /* Prevent gaps */
+}
+
+.star.selected {
+    color: gold; /* Color of selected stars */
+}
+
+.contact-us-section .contact-form button.submit-button,
+#addReviewModal .modal-content form button[type="submit"] { /* Targeting the submit button in the review modal */
+    background-color: var(--primary-color, #007bff); /* Use your primary color or a default blue */
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-us-section .contact-form button.submit-button:hover,
+#addReviewModal .modal-content form button[type="submit"]:hover {
+    background-color: var(--primary-color, #0a4a8e); /* Darken on hover */
+}
+
+.contact-us-section .contact-form button.submit-button:focus,
+#addReviewModal .modal-content form button[type="submit"]:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb, 0, 123, 255), 0.5); /* Add a custom focus shadow */
+}
+
+/* Optional styling for different states (active, disabled) */
+.contact-us-section .contact-form button.submit-button:active,
+#addReviewModal .modal-content form button[type="submit"]:active {
+    background-color: darken(var(--primary-color, #007bff), 15%);
+}
+
+.contact-us-section .contact-form button.submit-button:disabled,
+#addReviewModal .modal-content form button[type="submit"]:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+.view-all-reviews-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #6c757d; /* Example grey color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-left: 10px; /* Add some spacing between the buttons */
+}
+
+.view-all-reviews-button:hover {
+    background-color: #545b62;
+}
+
+/* Styles specific to the branches section */
+.branches-section {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #f9f9f9; /* Optional background color */
+}
+
+.branches-section h2 {
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.branch-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.branch {
+    flex: 1 1 300px; /* Distribute and set a minimum width */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.branch h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.branch p {
+    margin-bottom: 15px;
+}
+
+.branch-map-container {
+    width: 100%;
+    height: 300px; /* Adjust map height as needed */
+    border: 1px solid #eee;
+    border-radius: 5px;
+    margin-top: 15px;
+    overflow: hidden;
+}
+
+.view-branch-details-button {
+        background-color: #007bff; /* Blue background */
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.9em;
+        text-decoration: none;
+        margin-top: 10px;
+        margin-bottom: 10px; /* Add space below the button */
+        display: inline-block;
+}
+
+.view-branch-details-button:hover {
+    background-color: #0056b3;
+}
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .branch {
+        flex-basis: 100%; /* Stack branches on smaller screens */
+    }
+}

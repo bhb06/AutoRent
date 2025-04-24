@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car Rental Chat</title>
+  <link rel="stylesheet" href="/frontend/css/chat.css" />
+</head>
+<body>
+  <header id="navbar-container"></header>
+
+  <div class="chat-container">
+
+    <!-- Sidebar -->
+    <aside class="chat-sidebar">
+      <div class="chat-header">
+        <h2>🚗 Car Rental Assistant</h2>
+        <button id="newChatBtn">➕ New Chat</button>
+        <input type="text" id="searchInput" placeholder="Search conversations..." />
+      </div>
+      <div id="chatList" class="chat-list"></div>
+      <div class="chat-footer">
+        <a href="view-all.html">📅 Quick Rental</a><br/>
+        <a href="/frontend/html/index.html#locations">📍 Find Locations</a>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <h2>Chat Content</h2>
+      <div id="chatContent" style="margin-bottom: 20px;">Select a chat from the sidebar.</div>
+
+      <!-- Chat Input Section (Initially Hidden) -->
+      <div class="chat-input-area" id="chatInputContainer" style="display: none;">
+        <input type="text" id="messageInput" placeholder="Type your message..." />
+        <button id="sendMessageBtn">Send</button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="/frontend/js/chat.js"></script>
+</body>
+</html>

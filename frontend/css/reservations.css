@@ -1,0 +1,492 @@
+/* Styling for the Reserve Car Page Hero Section */
+.reserve-hero-section {
+    background-image: url('../images/footer-background.jpg'); /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 150px 0; /* Adjust padding for desired height */
+    text-align: left; /* Align text to the left, similar to the example */
+}
+
+.reserve-hero-content {
+    max-width: 1200px; /* Match your general content width */
+    margin: 0 auto;
+    padding: 0 20px; /* Add some side padding */
+}
+
+.reserve-hero-content h1 {
+    font-size: 3em; /* Adjust font size for the title */
+    margin-bottom: 10px;
+}
+
+.reserve-hero-content .breadcrumb {
+    font-size: 0.9em;
+    color: #eee; /* Light color for breadcrumb */
+}
+
+.reserve-hero-content .breadcrumb a {
+    color: white;
+    text-decoration: none;
+}
+
+.reserve-hero-content .breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for the hero section */
+@media (max-width: 768px) {
+    .reserve-hero-section {
+        padding: 100px 0;
+    }
+
+    .reserve-hero-content h1 {
+        font-size: 2.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    .reserve-hero-section {
+        padding: 80px 0;
+    }
+
+    .reserve-hero-content h1 {
+        font-size: 2em;
+    }
+}
+
+/* Reservation Form Section */
+.reservation-form-section {
+    padding: 40px 0;
+    background-color: #fff;
+}
+
+.reservation-form-section .container {
+    max-width: 800px; /* Adjust form width */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.reservation-form-section h2 {
+    font-size: 2em;
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+}
+
+.reservation-form-section .form-group {
+    margin-bottom: 20px;
+}
+
+.reservation-form-section label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.reservation-form-section input[type="date"],
+.reservation-form-section select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.reservation-form-section .checkbox-group {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.reservation-form-section .checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.reservation-form-section .note {
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 5px;
+}
+
+.reservation-form-section .reserve-now-button {
+    background-color: #007bff; /* Primary button color */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.reservation-form-section .reserve-now-button:hover {
+    background-color: #0056b3;
+}
+
+/* Car Details Section */
+.car-details-section {
+    padding: 40px 0;
+    background-color: #f9f9f9; /* Light background */
+}
+
+.car-details-section .container {
+    max-width: 1200px; /* Match your general content width */
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center; /* Center the main heading */
+}
+
+.car-details-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.car-details-section .car-overview {
+    display: flex;
+    align-items: flex-start; /* Keep items aligned to the start */
+    justify-content: center; /* Center the main content block */
+    margin-bottom: 30px;
+    flex-direction: row; /* Ensure main image and details are side by side on larger screens */
+}
+
+.car-details-section .image-gallery {
+    width: 50%; /* Adjust width as needed */
+    margin-right: 20px; /* Space between image and details */
+    display: flex;
+    flex-direction: column; /* Stack main image and thumbnail slider */
+    align-items: center; /* Center the thumbnail slider horizontally */
+}
+
+.car-details-section .main-image {
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 80%; /* Adjust main image width if needed */
+}
+
+.car-details-section .main-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.car-details-section .thumbnail-slider {
+    display: flex;
+    align-items: center;
+    width: 100%; /* Make thumbnail slider take full width of image gallery */
+    justify-content: center; /* Center the arrows and thumbnail list initially */
+    margin-top: 10px; /* Add some space above thumbnails */
+}
+
+.car-details-section .thumb-arrow {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: #555;
+    cursor: pointer;
+    padding: 5px;
+    outline: none;
+    margin: 0 10px; /* Add spacing around arrows */
+}
+
+.car-details-section .thumbnail-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* width: calc(100% - 60px); */ /* Adjust width for arrows - let flex handle it */
+    align-items: center; /* Center thumbnails vertically within the slider */
+}
+
+.car-details-section .thumbnail-list img {
+    width: 80px; /* Adjust thumbnail size */
+    height: auto;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    scroll-snap-align: start;
+}
+
+.car-details-section .thumbnail-list img:last-child {
+    margin-right: 0;
+}
+
+.car-details-section .thumbnail-list img:hover {
+    opacity: 1;
+}
+
+.car-details-section .details-overview {
+    width: 40%; /* Adjust width as needed */
+    text-align: left;
+}
+
+.car-details-section .price {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #555;
+    text-align: left; /* Align price to the left */
+}
+
+.car-details-section .price .from {
+    color: #888;
+    margin-right: 5px;
+}
+
+.car-details-section .price .amount {
+    font-size: 1.8em;
+    color: #007bff; /* Example primary color */
+    font-weight: bold;
+    margin-right: 15px;
+}
+
+.car-details-section .price .msrp {
+    font-size: 1em;
+    color: #777;
+    text-decoration: line-through;
+}
+
+.car-details-section .specs-list {
+    list-style: none;
+    padding: 0;
+    text-align: left; /* Align specs list to the left */
+}
+
+.car-details-section .specs-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Reduce margin for tighter spacing */
+    font-size: 1em;
+    color: #444;
+}
+
+.car-details-section .specs-list li i {
+    font-size: 1em; /* Adjust icon size */
+    margin-right: 8px; /* Space between icon and label */
+    color: #007bff; /* Example icon color */
+    width: 16px; /* Adjust for consistent icon width */
+    text-align: center;
+}
+
+.car-details-section .specs-list li span {
+    font-weight: bold;
+    margin-right: 5px; /* Space between label and value */
+}
+
+.car-details-section .specs-list li strong {
+    font-weight: normal; /* Reset strong's bold as label is bold */
+    margin-left: 5px; /* Space between label and value */
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .car-details-section .car-overview {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .car-details-section .image-gallery {
+        width: 80%;
+        margin-right: 0;
+        align-items: center; /* Center image gallery content */
+    }
+
+    .car-details-section .main-image {
+        width: 100%; /* Full width on smaller screens */
+    }
+
+    .car-details-section .thumbnail-slider {
+        width: 100%;
+        justify-content: center; /* Center thumbnails and arrows */
+    }
+
+    .car-details-section .details-overview {
+        width: 80%;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .car-details-section .price {
+        text-align: center; /* Center price on smaller screens */
+    }
+
+    .car-details-section .specs-list {
+        text-align: center; /* Center specs list on smaller screens */
+    }
+}
+
+.reservation-form-section select[multiple] {
+    height: 80px; /* Adjust as needed */
+}
+
+.reservation-form-section .checkbox-group {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.reservation-form-section .checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.reservation-form-section input[type="tel"],
+.reservation-form-section input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.reservation-form-section input[type="tel"]::placeholder,
+.reservation-form-section input[type="email"]::placeholder {
+    color: #aaa; /* Example placeholder color */
+}
+
+.required-error {
+    border: 1px solid red !important; /* Use !important to ensure override */
+}
+
+.form-group input.required-error,
+.form-group select.required-error {
+    border: 1px solid red;
+}
+
+.error-message {
+    display: block;
+    color: red;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+
+/* In your reserve.css or a general form CSS file */
+
+.form-group-inline {
+    display: flex;
+    gap: 20px; /* Adjust the spacing between the fields */
+    margin-bottom: 20px; /* Add margin below the inline group */
+}
+
+.form-group-inline .form-group {
+    flex: 1; /* Distribute available space equally between the fields */
+}
+
+.form-group {
+    margin-bottom: 20px; /* Add margin below other form groups */
+}
+
+.form-group label {
+    display: block; /* Make labels appear above the input fields */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.select-with-details {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between select and button */
+}
+
+.select-with-details select {
+    flex-grow: 1; /* Allow select to take up available space */
+}
+
+.view-details-button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-button:hover {
+    background-color: #eee;
+}
+
+/* Style for the popup message (initially hidden) */
+.branch-details-popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    z-index: 1000; /* Ensure it's on top of other elements */
+    text-align: left;
+}
+
+.branch-details-popup h3 {
+    margin-top: 0;
+    color: var(--primary-color, #007bff);
+    margin-bottom: 10px;
+}
+
+.branch-details-popup p {
+    margin-bottom: 5px;
+}
+
+.branch-details-popup .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #555;
+}
+
+.branch-details-popup .close-button:hover {
+    color: #000;
+}
+
+.select-with-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.select-with-details select {
+    flex-grow: 1;
+}
+
+.view-details-adjacent-button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-details-adjacent-button:hover {
+    background-color: #eee;
+}

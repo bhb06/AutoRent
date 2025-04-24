@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Reservation = require('../models/Reservation');
 const Car = require('../models/Car');
 const Branch = require('../models/Branch');
@@ -21,6 +22,10 @@ exports.createReservation = async (req, res) => {
       selectedCars,
       services
     } = req.body;
+
+    if (!req.user || !req.user._id) {
+      return res.status(401).json({ message: 'User authentication failed during reservation.' });
+    }
 
     const start = new Date(pickupDate);
     const end = new Date(dropDate);
@@ -75,7 +80,7 @@ exports.createReservation = async (req, res) => {
   }
 };
 
-// ✅ Get all reservations (admin)
+// ✅ Get all reservations (admin only)
 exports.getAllReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find()
@@ -89,7 +94,7 @@ exports.getAllReservations = async (req, res) => {
   }
 };
 
-// ✅ Get own reservations (user)
+// ✅ Get user's own reservations
 exports.getUserReservations = async (req, res) => {
   try {
     const reservations = await Reservation.find({ userId: req.user._id })
@@ -102,62 +107,60 @@ exports.getUserReservations = async (req, res) => {
   }
 };
 
+// ✅ Update reservation status (admin only)
 exports.updateReservationStatus = async (req, res) => {
-    try {
-      const { status } = req.body;
-  
-      // Restrict status values
-      if (!['reserved', 'canceled', 'completed'].includes(status)) {
-        return res.status(400).json({ message: 'Invalid status value' });
-      }
-  
-      const updated = await Reservation.findByIdAndUpdate(
-        req.params.id,
-        { status },
-        { new: true }
-      );
-  
-      if (!updated) {
-        return res.status(404).json({ message: 'Reservation not found' });
-      }
-  
-      res.status(200).json({ message: 'Reservation status updated', data: updated });
-  
-    } catch (error) {
-      res.status(500).json({ message: 'Error updating reservation', error: error.message });
-    }
-  };
-  
-  // restricted to hitory reservations (cancel is present for users to cancel)
-  exports.deleteReservation = async (req, res) => {
-    try {
-      const reservation = await Reservation.findById(req.params.id);
-      if (!reservation) return res.status(404).json({ message: "Reservation not found" });
-  
-      const isOwner = reservation.userId.toString() === req.user._id.toString();
-      const isAdmin = req.user.role === 'admin';
-  
-      // Only allow user to delete if status is canceled or completed
-      if (isOwner && !['canceled', 'completed'].includes(reservation.status)) {
-        return res.status(403).json({
-          message: "You can only delete completed or canceled reservations from your history"
-        });
-      }
-  
-      if (!isOwner && !isAdmin) {
-        return res.status(403).json({ message: "Not authorized to delete this reservation" });
-      }
-  
-      await reservation.deleteOne();
-      res.status(200).json({ message: "Reservation deleted successfully" });
-  
-    } catch (error) {
-      res.status(500).json({ message: "Error deleting reservation", error: error.message });
-    }
-  };
-  
+  try {
+    const { status } = req.body;
 
-// ✅ User edits reservation (before pickup date)
+    if (!['reserved', 'canceled', 'completed'].includes(status)) {
+      return res.status(400).json({ message: 'Invalid status value' });
+    }
+
+    const updated = await Reservation.findByIdAndUpdate(
+      req.params.id,
+      { status },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({ message: 'Reservation not found' });
+    }
+
+    res.status(200).json({ message: 'Reservation status updated', data: updated });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating reservation', error: error.message });
+  }
+};
+
+// ✅ Delete reservation (only if canceled/completed)
+exports.deleteReservation = async (req, res) => {
+  try {
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) return res.status(404).json({ message: "Reservation not found" });
+
+    const isOwner = reservation.userId.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin';
+
+    if (isOwner && !['canceled', 'completed'].includes(reservation.status)) {
+      return res.status(403).json({
+        message: "You can only delete completed or canceled reservations from your history"
+      });
+    }
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: "Not authorized to delete this reservation" });
+    }
+
+    await reservation.deleteOne();
+    res.status(200).json({ message: "Reservation deleted successfully" });
+
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting reservation", error: error.message });
+  }
+};
+
+// ✅ Update reservation by user before pickup
 exports.updateReservationByUser = async (req, res) => {
   try {
     const reservation = await Reservation.findById(req.params.id);
@@ -182,7 +185,7 @@ exports.updateReservationByUser = async (req, res) => {
     } = req.body;
 
     reservation.pickupBranch = pickupBranch || reservation.pickupBranch;
-    reservation.dropLocation = dropBranch || reservation.dropBranch;
+    reservation.dropBranch = dropBranch || reservation.dropBranch;
     reservation.pickupDate = pickupDate || reservation.pickupDate;
     reservation.dropDate = dropDate || reservation.dropDate;
     reservation.selectedCars = selectedCars || reservation.selectedCars;
@@ -196,7 +199,7 @@ exports.updateReservationByUser = async (req, res) => {
   }
 };
 
-// ✅ Show reserved dates for a car
+// ✅ Get reserved dates for a car
 exports.getCarReservedDates = async (req, res) => {
   try {
     const { id } = req.params;
@@ -217,47 +220,83 @@ exports.getCarReservedDates = async (req, res) => {
   }
 };
 
+// ✅ Auto-complete past reservations
 exports.autoCompleteReservations = async (req, res) => {
-    try {
-      const now = new Date();
-  
-      const result = await Reservation.updateMany(
-        {
-          dropDate: { $lt: now },
-          status: 'reserved'
-        },
-        { status: 'completed' }
-      );
-  
-      res.status(200).json({
-        message: 'Auto-complete check done',
-        updatedCount: result.modifiedCount
-      });
-  
-    } catch (error) {
-      res.status(500).json({ message: 'Error auto-completing reservations', error: error.message });
-    }
-  };
+  try {
+    const now = new Date();
 
-  exports.cancelReservationByUser = async (req, res) => {
-    try {
-      const reservation = await Reservation.findById(req.params.id);
-      if (!reservation) return res.status(404).json({ message: 'Reservation not found' });
-  
-      if (reservation.userId.toString() !== req.user._id.toString()) {
-        return res.status(403).json({ message: 'Not authorized to cancel this reservation' });
-      }
-  
-      if (reservation.status !== 'reserved') {
-        return res.status(400).json({ message: 'Only active reservations can be canceled' });
-      }
-  
-      reservation.status = 'canceled';
-      await reservation.save();
-  
-      res.status(200).json({ message: 'Reservation canceled successfully', data: reservation });
-  
-    } catch (error) {
-      res.status(500).json({ message: 'Error canceling reservation', error: error.message });
+    const result = await Reservation.updateMany(
+      { dropDate: { $lt: now }, status: 'reserved' },
+      { status: 'completed' }
+    );
+
+    res.status(200).json({
+      message: 'Auto-complete check done',
+      updatedCount: result.modifiedCount
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Error auto-completing reservations', error: error.message });
+  }
+};
+
+// ✅ Cancel reservation by user
+exports.cancelReservationByUser = async (req, res) => {
+  try {
+    const reservation = await Reservation.findById(req.params.id);
+    if (!reservation) return res.status(404).json({ message: 'Reservation not found' });
+
+    if (reservation.userId.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized to cancel this reservation' });
     }
-  };
+
+    if (reservation.status !== 'reserved') {
+      return res.status(400).json({ message: 'Only active reservations can be canceled' });
+    }
+
+    reservation.status = 'canceled';
+    await reservation.save();
+
+    res.status(200).json({ message: 'Reservation canceled successfully', data: reservation });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Error canceling reservation', error: error.message });
+  }
+};
+
+// ✅ Get one reservation by ID (for checkout)
+exports.getReservationById = async (req, res) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ message: 'Invalid reservation ID format' });
+    }
+
+    const reservation = await Reservation.findById(req.params.id)
+      .populate('selectedCars', 'brand model dailyFee image')
+      .populate('pickupBranch', 'name address phone')
+      .populate('dropBranch', 'name address phone')
+      .populate('userId', 'username email');
+
+    if (!reservation) {
+      return res.status(404).json({ message: 'Reservation not found' });
+    }
+
+    if (!reservation.userId || !reservation.userId._id) {
+      console.log('❌ Reservation has no valid userId (possibly deleted)');
+      return res.status(403).json({ message: 'Invalid or missing user linked to reservation' });
+    }
+
+    const isOwner = reservation.userId._id.toString() === req.user._id.toString();
+    const isAdmin = req.user.role === 'admin';
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: 'Not authorized to view this reservation' });
+    }
+
+    res.status(200).json(reservation);
+
+  } catch (error) {
+    console.error('🔥 ERROR in getReservationById:', error);
+    res.status(500).json({ message: 'Error fetching reservation', error: error.message });
+  }
+};

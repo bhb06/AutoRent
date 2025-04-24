@@ -1,0 +1,86 @@
+/* Styles from the previous response */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    color: #222;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.rental-info, .personal-info, .payment-options, .coupon-section, .actions {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.rental-info h2, .personal-info h2, .payment-options h2, .coupon-section h2 {
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="date"],
+input[type="time"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+.payment-options label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+.payment-options label input[type="radio"] {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.actions button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+.actions button:hover {
+    background-color: #0056b3;
+}
+.hidden {
+    display: none;
+}
+#couponMessage {
+    margin-top: 10px;
+    font-style: italic;
+    color: green; /* Or red for error */
+}

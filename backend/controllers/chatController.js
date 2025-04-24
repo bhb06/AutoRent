@@ -56,7 +56,10 @@ exports.getMySessions = async (req, res) => {
 exports.getMessagesInSession = async (req, res) => {
   try {
     const sessionId = req.params.sessionId;
-    const messages = await ChatMessage.find({ chatSessionId: sessionId }).sort('timestamp');
+    const messages = await ChatMessage.find({ chatSessionId: sessionId })
+      .sort('timestamp')
+      .populate('sender', 'username')  // Populate only the username field
+      .populate('receiver', 'username');
     res.status(200).json(messages);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching messages', error: error.message });

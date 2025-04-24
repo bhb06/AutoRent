@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserve a Car - AUTORENT</title>
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/reservations.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="../js/reservations.js" defer></script>
+</head>
+<body>
+  <header id="navbar-container"></header>
+
+  <div class="reserve-hero-section">
+    <div class="reserve-hero-content">
+      <h1>Car Reservation</h1>
+      <div class="breadcrumb">
+        <a href="#">Home</a> / Reserve
+      </div>
+    </div>
+  </div>
+
+  <div class="car-details-section">
+    <div class="container">
+      <h2 id="carTitle">Loading...</h2>
+      <div class="car-overview">
+        <div class="image-gallery">
+          <div class="main-image">
+            <img id="mainCarImage" src="" alt="Selected Car" />
+          </div>
+        </div>
+        <div class="details-overview">
+          <div class="price">
+            <span class="from">FROM</span>
+            <span class="amount" id="carPrice">$0/day</span>
+          </div>
+          <ul class="specs-list">
+            <!-- specs will be populated dynamically from JS -->
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reservation-form-section">
+    <div class="container">
+      <h2>Reserve Your Car</h2>
+      <form id="reservationForm">
+        <div class="form-group">
+          <label for="userName">User Name:</label>
+          <input type="text" id="userName" required />
+        </div>
+        <div class="form-group">
+          <label for="driverAge">Driver's Age (18-75):</label>
+          <input type="number" id="driverAge" min="18" max="75" required />
+        </div>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number:</label>
+          <input type="tel" id="phoneNumber" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" />
+        </div>
+
+        <!-- Dynamic Pickup Branch -->
+        <div class="form-group">
+          <label for="pickupBranch">Pickup Branch:</label>
+          <select id="pickupBranch" required>
+            <option value="">Loading branches...</option>
+          </select>
+        </div>
+
+        <!-- Dynamic Dropoff Branch -->
+        <div class="form-group">
+          <label for="dropoffBranch">Drop-off Branch:</label>
+          <select id="dropoffBranch" required>
+            <option value="">Loading branches...</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pickupDate">Pickup Date:</label>
+          <input type="date" id="pickupDate" required />
+        </div>
+        <div class="form-group">
+          <label for="dropDate">Drop-off Date:</label>
+          <input type="date" id="dropDate" required />
+        </div>
+        <div class="form-group">
+          <label for="selectedCars">Selected Car:</label>
+          <input type="text" id="selectedCars" readonly />
+        </div>
+        <div class="form-group">
+          <label for="totalPrice">Total Price:</label>
+          <input type="number" id="totalPrice" readonly />
+        </div>
+        <button type="submit" class="reserve-now-button">Confirm Reservation</button>
+      </form>
+    </div>
+  </div>
+
+  <footer id="footer-container"></footer>
+
+  <script>
+    // Load real branches from backend
+    async function loadBranches() {
+      try {
+        const res = await fetch('http://localhost:5000/api/branches');
+        const branches = await res.json();
+
+        const pickupSelect = document.getElementById('pickupBranch');
+        const dropoffSelect = document.getElementById('dropoffBranch');
+
+        // Clear and populate both selects
+        pickupSelect.innerHTML = '<option value="">Select Pickup Branch</option>';
+        dropoffSelect.innerHTML = '<option value="">Select Drop-off Branch</option>';
+
+        branches.forEach(branch => {
+          const option = document.createElement('option');
+          option.value = branch._id;
+          option.textContent = `${branch.name} - ${branch.address}`;
+          pickupSelect.appendChild(option);
+        });
+
+        branches.forEach(branch => {
+          const option = document.createElement('option');
+          option.value = branch._id;
+          option.textContent = `${branch.name} - ${branch.address}`;
+          dropoffSelect.appendChild(option);
+        });
+      } catch (err) {
+        console.error('❌ Failed to load branches:', err);
+        alert('Failed to load branch list. Try again later.');
+      }
+    }
+
+    // Run loader after DOM is ready
+    document.addEventListener('DOMContentLoaded', loadBranches);
+  </script>
+</body>
+</html>

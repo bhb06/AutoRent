@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const { getStatistics } = require('../controllers/statisticsController');
+const {
+  getHomeStats,
+  getBusinessStats
+} = require('../controllers/statisticsController');
 
-// Route for statistical information
-router.get('/statistics', getStatistics);
+// Homepage stats (available cars, reviews, etc.)
+router.get('/home-stats', getHomeStats);
+
+// Business insights (most popular car, avg fee)
+router.get('/business', getBusinessStats);
 
 module.exports = router;

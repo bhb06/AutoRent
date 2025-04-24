@@ -1,0 +1,256 @@
+body {
+    height: 100%;
+    font-family: 'Inter',sans-serif;
+    background-image: url('../images/bg4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.elements_Container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.login-container {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.brand img {
+    margin-left:30%;
+    width: 50%;
+}
+.brand-forgetPassword img{
+    width:50%;
+    margin-left:21.2%;
+}
+.password-container {
+    position: relative !important;
+}
+
+.password-icon {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    cursor: pointer;
+    color: dimgrey;
+}
+.hide {
+    visibility: hidden;
+}
+
+.login-form {
+    padding: 60px;
+    max-width: 100%;
+    margin-top: 0px; /* Changed from 10px */
+    margin-bottom: 10px;
+}
+
+.passwordReset-form{
+    width:80%;
+}
+.Username-reset {
+    width:100%;
+}
+form{
+    margin:20px;
+}
+    .login-form h2 {
+        margin-bottom: 30px;
+        color: #333;
+        text-align: center;
+        font-weight: bold;
+    }
+.passwordReset-form h2 {
+    padding-left: 0%;
+    padding-top: 0%;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+.reset-Description {
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: -10px;
+
+}
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    position: relative; /* For positioning the eye icon */
+    flex-direction: column; /* Stack profile image elements */
+    align-items: center; /* Center profile image elements horizontally */
+}
+
+    .form-group input {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    .form-group a.forgot-password {
+        text-decoration: none;
+        color: #333;
+        font-size: 0.9em;
+        float: right;
+        margin-bottom: 10px;
+        margin-top: -5px;
+        margin-left: 300px;
+    }
+
+        .form-group a.forgot-password:hover {
+            text-decoration: underline;
+        }
+
+
+    .form-group button {
+        width: 100%;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 1em;
+        cursor: pointer;
+        margin: 0;
+
+    }
+
+.submit:hover {
+    background: #0056b3;
+}
+.SignIn:hover {
+    background: #0056b3;
+}
+.submit {
+    background: #007bff;
+}
+.cancel {
+    background: #E0E0E0;
+}
+
+.SignIn {
+    background: #007bff;
+}
+
+/* Style for the profile image upload section */
+.form-group.profile-image-upload {
+    margin-bottom: 30px; /* Add more space below the profile image section */
+}
+
+.profile-image-preview {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; /* Optional border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image fills the circle without distortion */
+}
+
+.upload-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Style for the password input group */
+.form-group.password-group {
+    position: relative; /* To position the toggle icon */
+    display: flex; /* Restore flex for input and icon */
+    justify-content: center; /* Center the input */
+}
+
+.form-group.password-group input[type="password"] {
+    width: 100%;
+    padding-right: 30px; /* Make space for the eye icon */
+}
+
+/* Style for the password toggle icon */
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+}
+
+.password-toggle:hover {
+    color: #333;
+}
+
+@media only screen and (max-width: 768px) {
+    .elements_Container {
+        flex-direction: column;
+    }
+    .brand{
+        display:flex;
+        justify-content:center;
+    }
+    .brand img {
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .form-group a.forgot-password {
+        margin-left: 0;
+}
+
+}@media only screen and (max-width:1200px){
+    .form-group button {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.7em;
+        cursor: pointer;
+
+    }
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AUTORENT</title>
+    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/about-us.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header id="navbar-container"></header>
+
+    <div class="hero-section about-us-hero">
+        <div class="hero-content">
+            <h1>About Us</h1>
+            <div class="breadcrumb">
+                <a href="#">Home</a> / About Us
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-item">
+            <i class="fas fa-car"></i>
+            <span class="number" id="not-rented-today">0</span>
+            <span class="label">CARS AVAILABLE TODAY</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-cog"></i>
+            <span class="number" id="total-cars">0</span>
+            <span class="label">TOTAL CARS</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-bell"></i>
+            <span class="number" id="total-reviews">0</span>
+            <span class="label">HAPPY CLIENTS</span>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-trophy"></i>
+            <span class="number" id="total-reservations">0</span>
+            <span class="label">TOTAL RESERVATIONS</span>
+        </div>
+    </div>
+
+    <div class="our-story-section" id="services-sec">
+        <div class="container">
+            <div class="section-title">
+                <h2>OUR SERVICES</h2>
+            </div>
+            <div class="story-content">
+                <div class="story-text">
+                    <h3>The Journey of AUTORENT</h3>
+                    <p>Founded in 2025, AUTORENT started with a simple vision: to provide high-quality vehicles and exceptional service to our community. What began as a small family-owned business has grown into a trusted name in the automotive industry in Lebanon.</p>
+                    <p>Our commitment to integrity, transparency, and customer satisfaction has been the cornerstone of our success. We believe in building long-lasting relationships with our clients, understanding their needs, and helping them find the perfect vehicle to match their lifestyle and budget.</p>
+                    <p>Over the years, we have expanded our inventory to include a wide range of cars, as well as offering comprehensive after-sales services, including maintenance, repairs, and genuine spare parts. Our team of experienced and passionate professionals is dedicated to providing you with an unparalleled car renting experience.</p>
+                    <p>We are proud of our history and excited about the future. As the automotive landscape evolves, AUTORENT remains committed to innovation, continuous improvement, and exceeding the expectations of our valued customers.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="our-team-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>OUR TEAM</h2>
+                <p>Meet the dedicated professionals who make AUTORENT the trusted car dealer it is.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="/frontend/images/batoul (2).jpeg" alt="Team Member 1">
+                    <h3>Batoul Ballout</h3>
+                    <span>General Manager</span>
+                    <a href="mailto:bhb06@aub.edu.lb">bhb06@aub.edu.lb</a>
+                </div>
+                <div class="team-member">
+                    <img src="../images/rasha.jpeg" alt="Team Member 2">
+                    <h3>Rasha Harb</h3>
+                    <span>Sales Manager</span>
+                    <a href="mailto:rhh44@aub.edu.lb">rhh44@aub.edu.lb</a>
+                </div>
+                <div class="team-member">
+                    <img src="../images/razan.jpeg" alt="Team Member 3">
+                    <h3>Razan Doughman</h3>
+                    <span>Service Advisor</span>
+                    <a href="mailto:rhd18@aub.edu.lb">rhd18@aub.edu.lb</a>
+                </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="why-choose-us-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>WHY CHOOSE US?</h2>
+                <p>Discover the reasons why AUTORENT is the preferred choice for renting cars.</p>
+            </div>
+            <div class="reasons-grid">
+                <div class="reason-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Wide Selection of Vehicles</h3>
+                    <p>We offer an extensive inventory of new and used cars from various makes and models to suit every need and budget.</p>
+                </div>
+                <div class="reason-item">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Exceptional Customer Service</h3>
+                    <p>Our dedicated team is committed to providing you with a personalized and hassle-free car renting experience.</p>
+                </div>
+                <div class="reason-item">
+                    <i class="fas fa-tag"></i>
+                    <h3>Competitive Pricing</h3>
+                    <p>We strive to offer the most competitive prices and financing options to help you.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>WHAT OUR CLIENTS SAY</h2>
+            </div>
+            <div class="testimonials-carousel" id="testimonials-carousel">
+                <!-- Reviews will be inserted dynamically -->
+            </div>            
+        </div>
+    </div>
+
+    <div class="contact-us-section" id="contact-us">
+        <div class="container">
+            <div class="section-title">
+                <h2>CONTACT US</h2>
+                <p>We'd love to hear from you! Get in touch with our team today.</p>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm"> <!-- ✅ Form ID for JS -->
+                    <div class="form-group">
+                        <input type="text" id="contactName" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="contactEmail" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="contactMessage" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>    
+
+    <footer id="footer-container"></footer>
+
+    <script src="../js/about-us.js"></script>
+</body>
+</html>

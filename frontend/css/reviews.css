@@ -1,0 +1,343 @@
+/* reviews.css */
+
+/* Reviews Section */
+.reviews-section {
+    padding: 30px 0;
+    flex-grow: 1;
+}
+
+.reviews-section .container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Stack title container and reviews */
+    align-items: center; /* Center content horizontally */
+}
+
+/* Style for the container of the main "Customer Reviews" title */
+.reviews-section .container .reviews-title-container {
+    width: 100%;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px; /* Add significant space below the title */
+}
+
+.reviews-section .container .reviews-title-container h1 {
+    font-size: 1.8em;
+    color: var(--primary-color, #007bff);
+}
+
+.reviews-section .container .reviews-title-container p {
+    color: #6c757d;
+    font-size: 1em;
+}
+
+#all-reviews-container {
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 35px;
+    width: 100%; /* Make the review grid span the container width */
+}
+
+.review-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px; /* Slightly reduce padding to give more space */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column; /* Stack content vertically */
+    gap: 10px; /* Reduce gap between elements inside the card */
+    align-items: flex-start; /* Align items to the start (left) */
+}
+
+.review-card h4 {
+    font-size: 1em; /* Further reduce title size */
+    color: var(--secondary-color, #28a745);
+    margin-bottom: 3px; /* Reduce margin below title */
+    line-height: 1.2; /* Improve line height for potentially longer titles */
+    word-break: break-word; /* Prevent long words from breaking the layout */
+}
+
+.review-card .rating {
+    color: #ffc107;
+    font-size: 0.8em; /* Reduce rating size */
+    margin-bottom: 8px; /* Adjust margin below rating */
+}
+
+.review-card .review-text {
+    color: #495057;
+    line-height: 1.4; /* Adjust line height for text */
+    margin-bottom: 10px; /* Adjust margin below text */
+    word-break: break-word; /* Prevent long words from breaking the layout */
+}
+
+.review-card .review-actions {
+    display: flex;
+    gap: 8px; /* Reduce gap between buttons */
+    justify-content: flex-end;
+    margin-top: auto; /* Push actions to the bottom if there's extra space */
+}
+
+.edit-button, .delete-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 8px; /* Further reduce button padding */
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.75em; /* Further reduce button font size */
+    transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .review-user-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+  }
+  
+  .review-user-info strong {
+    display: block;
+    font-size: 14px;
+  }
+  
+  .review-date {
+    font-size: 12px;
+    color: #888;
+  }
+  
+
+/* Add New Review Form */
+.add-review-form {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    border: 1px solid #eee;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.add-review-form h2 {
+    font-size: 1.3em;
+    color: var(--primary-color, #007bff);
+    margin-bottom: 20px;
+}
+
+.add-review-form .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.add-review-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #495057;
+}
+
+.add-review-form input[type="text"],
+.add-review-form textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.add-review-form .star-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.add-review-form .star-rating .stars {
+    display: inline-flex;
+}
+
+.add-review-form .star-rating .star {
+    font-size: 1.3em;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.add-review-form .star-rating .star.selected {
+    color: #ffc107;
+}
+
+.add-review-form .submit-button {
+    background-color: var(--primary-color, #007bff);
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+.add-review-form .submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Edit Review Modal */
+#editReviewModal .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+}
+
+#editReviewModal h3 {
+    font-size: 1.4em;
+    color: var(--primary-color, #007bff);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#editReviewModal .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#editReviewModal label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #495057;
+}
+
+#editReviewModal input[type="text"],
+#editReviewModal textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+#editReviewModal .star-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+#editReviewModal .star-rating .stars {
+    display: inline-flex;
+}
+
+#editReviewModal .star-rating .star {
+    font-size: 1.3em;
+    color: #ccc;
+    cursor: pointer;
+}
+
+#editReviewModal .star-rating .star.selected {
+    color: #ffc107;
+}
+
+#editReviewModal .form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+#editReviewModal .form-actions .submit-button,
+#editReviewModal .form-actions .cancel-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Body and reviews section for vertical elongation */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.reviews-section {
+    flex-grow: 1;
+}
+/* Responsive adjustments for even smaller screens */
+@media (max-width: 600px) {
+    .review-card h4 {
+        font-size: 0.9em; /* Even smaller title */
+        line-height: 1.1;
+    }
+
+    .review-card .rating {
+        font-size: 0.7em; /* Even smaller rating */
+        display: flex; /* Allow rating to wrap if needed */
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .review-card .review-actions {
+        flex-direction: column; /* Stack buttons vertically on very small screens */
+        align-items: stretch; /* Make buttons take full width */
+    }
+
+    .edit-button, .delete-button {
+        font-size: 0.7em;
+        padding: 6px 10px;
+    }
+}
+
+/* Responsive adjustments for standard smaller screens (if not already present) */
+@media (max-width: 768px) {
+    .reviews-hero .hero-content h1 {
+        font-size: 2em;
+    }
+    .reviews-section .container {
+        padding: 15px;
+    }
+    #all-reviews-container {
+        grid-template-columns: 1fr; /* Single column on smaller screens */
+    }
+    .review-card .review-actions {
+        justify-content: flex-start; /* Align buttons to the left on smaller screens */
+        flex-direction: row; /* Ensure buttons are in a row by default on these sizes */
+        align-items: center; /* Vertically align buttons */
+    }
+}

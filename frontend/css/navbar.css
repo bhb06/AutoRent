@@ -1,0 +1,125 @@
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif; 
+    line-height: 1.6;
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: black;
+    color: white;
+    display: flex;
+    /*justify-content: space-between;*/
+    justify-content: flex-start;
+    align-items: center;
+    padding: 15px 30px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin-left: 0;
+}
+
+.nav-links li {
+    margin-right: 25px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    padding-right: 5%;
+}
+
+.navbar-right > div {
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.navbar-right > div:not(:last-child) {
+    margin-right: 20px;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: white;
+}
+
+/* Mobile styles */
+@media (max-width: 1200px) {
+    /* Existing styles */
+
+    .logo {
+        position: static !important;
+        transform: none !important;
+        margin: 10px 0;
+        text-align: center;
+        z-index: auto;
+    }
+
+    .navbar {
+        position: static !important;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-links,
+    .navbar-right {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li,
+    .navbar-right div {
+        margin: 5px 0;
+    }
+    
+    .navbar-right {
+        margin-left: 0;
+        padding-right: 0;
+        margin-bottom: 10px;
+        justify-content: center;
+    }
+
+    .navbar-right > div {
+        margin: 10px 0;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+    }
+
+}

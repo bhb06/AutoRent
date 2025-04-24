@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout</title>
+  <link rel="stylesheet" href="../css/checkout.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+
+    <div class="rental-info">
+      <h2>Rental Summary</h2>
+      <div id="rentalDetails"></div>
+      <p><strong>Total Estimated Cost:</strong> <span id="totalCost">$0.00</span></p>
+    </div>
+
+    <div class="coupon-section">
+      <h2>Apply Coupon</h2>
+      <input type="text" id="couponCode" placeholder="Enter coupon code" />
+      <button onclick="applyCoupon()">Apply</button>
+      <p id="couponMessage"></p>
+    </div>
+
+    <div class="personal-info">
+        <h2>Login to Continue</h2>
+        <p><em>If you're not logged in, please enter your credentials:</em></p>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" />
+        </div>
+        <button onclick="loginUser()">Login</button>
+        <p id="loginError" style="color: red;"></p>
+      </div>
+
+    <div class="payment-options">
+      <h2>Choose Your Payment Method</h2>
+      <label><input type="radio" name="paymentMethod" value="creditCard" id="creditCardOption" /> Credit Card</label>
+      <div id="creditCardDetails" class="hidden">
+        <div class="form-group">
+          <label for="cardNumber">Card Number:</label>
+          <input type="text" id="cardNumber" />
+        </div>
+        <div class="form-group">
+          <label for="expiryDate">Expiry Date:</label>
+          <input type="text" id="expiryDate" placeholder="MM/YY" />
+        </div>
+        <div class="form-group">
+          <label for="cvv">CVV:</label>
+          <input type="text" id="cvv" />
+        </div>
+      </div>
+      <label><input type="radio" name="paymentMethod" value="payAtLocation" id="payAtLocationOption" /> Paying at Location</label>
+    </div>
+
+    <div class="actions">
+      <button onclick="saveTransaction()">Save Transaction</button>
+      <button onclick="proceedToPayment()">Pay Now</button>
+      <button onclick="softCancel()">Cancel and Exit</button>
+      <button onclick="requestQuotation()">Request Quotation</button>
+    </div>
+  </div>
+
+  <script src="../js/checkout.js"></script>
+</body>
+</html>

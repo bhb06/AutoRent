@@ -1,0 +1,67 @@
+/* Footer Section */
+.main-footer {
+    background-color: black; /* Dark background color as seen in the image */
+    color: #fff; /* Light text color */
+    padding: 20px 20px; /* Add some padding top, bottom, and sides */
+}
+
+.footer-content {
+    display: flex; /* Use Flexbox to arrange copyright and navigation */
+    justify-content: space-between; /* Put space between them, pushing them to opposite ends */
+    align-items: center; /* Vertically align copyright and navigation */
+    max-width: 1200px; /* Optional: Limit the width of the content */
+    margin: 0 auto; /* Optional: Center the content if max-width is used */
+}
+
+.copyright {
+    font-size: 0.9em; /* Slightly smaller font size for copyright */
+}
+
+.footer-navigation ul {
+    list-style: none; /* Remove bullet points from the list */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Arrange list items horizontally */
+}
+
+.footer-navigation li {
+    margin-left: 20px; /* Add some spacing between the links */
+}
+
+.footer-navigation li:first-child {
+    margin-left: 0; /* Remove left margin from the first link */
+}
+
+.footer-navigation a {
+    color: #fff; /* White link color */
+    text-decoration: none; /* Remove underlines from links */
+    font-size: 0.9em; /* Slightly smaller font size for links */
+}
+
+.footer-navigation a:hover {
+    color: #ddd; /* Slightly lighter color on hover for interaction */
+}
+
+/* Responsive adjustments (optional) */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack copyright and navigation on smaller screens */
+        align-items: center; /* Center items */
+        text-align: center; /* Center text */
+    }
+
+    .footer-navigation ul {
+        margin-top: 15px; /* Add some space above the navigation */
+        flex-direction: column; /* Stack links vertically */
+        align-items: center; /* Center links */
+    }
+
+    .footer-navigation li {
+        margin-left: 0;
+        margin-bottom: 10px; /* Add spacing between vertical links */
+    }
+
+    .footer-navigation li:last-child {
+        margin-bottom: 0; /* Remove bottom margin from the last link */
+    }
+}

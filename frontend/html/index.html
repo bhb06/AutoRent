@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend/css/style.css">
+    <link rel="stylesheet" href="/frontend/css/navbar.css">
+</head>
+<body>
+
+    <header id="navbar-container"></header>
+
+    <section class="hero">
+        <div class="hero-image-slider"></div>
+
+        
+        <div class="hero-content">
+            <p id="rent-dream" class="rent-dream">RENT YOUR DREAM CAR</p>
+            <h2 id="car-model" class="car-model"></h2>
+            <div id="price" class="price"></div>
+            <div class="hero-buttons">
+                <button class="button order-now">RENT NOW</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="car-categories">
+        <div class="offers-container">
+            <h2 class="section-title">CATEGORIES</h2>
+            <div class="category-grid">
+                <div class="slide-container">
+                    <a href="./view-all.html?groupID=67feca01b3702a051be7d61f" class="slide">
+                        <img src="../images/offer-car1.jpg" alt="SUV Cars">
+                        <h3 class="category-name">SUV</h3>
+                    </a>
+                </div>
+                <div class="slide-container">
+                    <a href="./view-all.html?groupID=67feca17b3702a051be7d625" class="slide">
+                        <img src="../images/offer-car2.png" alt="Electric Cars">
+                        <h3 class="category-name">Electric</h3>
+                    </a>
+                </div>
+                <div class="slide-container">
+                    <a href="./view-all.html?groupID=67feca20b3702a051be7d628" class="slide">
+                        <img src="../images/offer-car3.png" alt="Hybrid Cars">
+                        <h3 class="category-name">Hybrid</h3>
+                    </a>
+                </div>
+                <div class="slide-container">
+                    <a href="./view-all.html?groupID=67feca28b3702a051be7d62b" class="slide">
+                        <img src="../images/offer-car4.png" alt="Convertible Cars">
+                        <h3 class="category-name">Convertible</h3>
+                    </a>
+                </div>
+                <div class="slide-container">
+                    <a href="./view-all.html?groupID=67feca0bb3702a051be7d622" class="slide">
+                        <img src="../images/offer-car5.png" alt="Minivan">
+                        <h3 class="category-name">Minivan</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="view-all-container">
+                <a href="./view-all.html" class="view-all-button">View All</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="most-wanted-cars">
+        <h2 class="section-title">Most Wanted Cars</h2>
+      
+        <div class="most-wanted-wrapper">
+          <!-- JS will inject the most wanted car card here -->
+      
+          <!-- Average Daily Fee Box -->
+          <div class="average-fee-box">
+            <img src="../images/dollar.png" alt="Dollar Icon" class="fee-icon">
+            <h3>Average Daily Rental Fee</h3>
+            <p id="averageDailyFee">$---</p>
+          </div>
+        </div>
+      </section>
+      
+      
+
+      <div id="carDetailsModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" id="closeCarDetailsModal">&times;</span>
+          <h2 id="carDetailsModel"></h2>
+          <div id="carDetailsInfo"></div>
+        </div>
+      </div>      
+
+    <section class="branches-section" id="locations">
+        <h2>Our Rental Locations</h2>
+        <div class="branch-container" id="branchContainer"></div>
+      </section>
+      <div id="branchDetailsModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button" id="closeBranchDetailsModal">&times;</span>
+          <h2 id="branchModalTitle"></h2>
+          <p id="branchModalAddress"></p>
+          <p id="branchModalPhone"></p>
+          <p id="branchModalHours"></p>
+        </div>
+      </div>
+      
+
+      <div class="reviews-section">
+        <h2>Customer Reviews</h2>
+        <div class="reviews-carousel-container">
+            <div class="reviews-carousel">
+                </div>
+            <div class="carousel-navigation">
+                <button class="prev-review">&#10094;</button>
+                <button class="next-review">&#10095;</button>
+            </div>
+        </div>
+        <div class="review-actions">
+            <button class="add-review-button">Add Your Review</button>
+            <a href="./reviews.html" class="view-all-reviews-button">View All Reviews</a>
+        </div>
+    </div>
+    <div id="addReviewModal" class="modal">
+        <div class="modal-content">
+          <span class="close-button">&times;</span>
+          <h2>Add Your Review</h2>
+      
+          <form id="addReviewForm">
+            <div class="form-group">
+              <label for="reviewTitleHomepage">Title:</label>
+              <input type="text" id="reviewTitleHomepage" name="reviewTitle" required>
+            </div>
+      
+            <div class="form-group">
+              <label for="reviewTextHomepage">Your Review:</label>
+              <textarea id="reviewTextHomepage" name="reviewText" rows="5" required></textarea>
+            </div>
+      
+            <div class="form-group">
+              <label for="rating">Rating:</label>
+              <div class="star-rating">
+                <span class="star" data-rating="1">&#9734;</span>
+                <span class="star" data-rating="2">&#9734;</span>
+                <span class="star" data-rating="3">&#9734;</span>
+                <span class="star" data-rating="4">&#9734;</span>
+                <span class="star" data-rating="5">&#9734;</span>
+                <span id="ratingResult"> (0/5)</span>
+                <input type="hidden" id="selectedRatingHomepage" name="rating" value="0">
+              </div>
+            </div>
+      
+            <button type="submit">Submit Review</button>
+          </form>
+      
+          <div id="reviewSubmitMessage" class="message"></div>
+        </div>
+      </div>
+      
+
+    <section class="info-research-showroom">
+        <div class="info-research-wrapper">
+            <div class="info-column">
+                <h3>VEHICLES</h3>
+                <ul>
+                    <li><a href="/frontend/html/view-all.html">Cars</a></li>
+                    <li><a href="./view-all.html?groupID=67feca01b3702a051be7d61f">SUVs</a></li>
+                    <li><a href="./view-all.html?groupID=67feca17b3702a051be7d625">Electric</a></li>
+                    <li><a href="./view-all.html?groupID=67feca20b3702a051be7d628">Hybrid</a></li>
+                    <li><a href="./view-all.html?groupID=67feca28b3702a051be7d62b">Convertible</a></li>
+                    <li><a href="./view-all.html?groupID=67feca0bb3702a051be7d622">Minivan</a></li>
+                </ul>
+            </div>
+            <div class="research-column">
+                <h3>USEFUL LINKS</h3>
+                <ul>
+                    <li><a href="/frontend/html/about-us.html">About Us</a></li>
+                    <li><a href="/frontend/html/about-us.html#services-sec">Services</a></li>
+                    <li><a href="/frontend/html/profile.html">My Profile</a></li>
+                </ul>
+            </div>
+            <div class="showroom-column">
+                <h3>BRANCHES</h3>
+                <ul>
+                    <li><a href="https://maps.app.goo.gl/fPXjBT5WMNpm87L58">Beirut</a></li>
+                    <li><a href="https://maps.app.goo.gl/CCPYp4bU6wvP7NdP8">Nabatieh</a></li>
+                    <li><a href="https://maps.app.goo.gl/9bhBGABqT5WN74xA8">Beqaa</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer-container"></footer>
+
+    <script src="../script.js" defer></script>
+</body>
+</html>

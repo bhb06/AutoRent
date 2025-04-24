@@ -3,57 +3,76 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const path = require('path'); 
+const path = require('path');
 const connectDB = require('./config/db');
 
-// Load environment variables
+// Load environment variables early
 dotenv.config();
-console.log('Loaded MONGO_URI:', process.env.MONGO_URI);
-
-// Connect to MongoDB
 connectDB();
 
 const app = express();
 const server = http.createServer(app);
-
-// Set up Socket.IO with CORS
 const io = socketIo(server, {
   cors: {
-    origin: '*', // Replace with frontend domain in production
+    origin: '*', // Replace with your frontend URL in production
     methods: ['GET', 'POST']
   }
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: function (origin, callback) {
+    const allowedOrigins = ['http://localhost:5500', 'http://127.0.0.1:5500'];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed for this origin'));
+    }
+  },
+  credentials: true
+}));
+
 app.use(express.json());
-
-// Auth Routes
-const authRoutes = require('./routes/auth');
-app.use('/api/auth', authRoutes);
-
-const userRoutes = require('./routes/users');
-app.use('/api/users', userRoutes);
-
-const uploadRoutes = require('./routes/upload');
-app.use('/api/upload', uploadRoutes);
-
-//  Serve static image files (e.g., /images/users/pic.jpg)
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/users', require('./routes/users'));
+app.use('/api/upload', require('./routes/upload'));
+app.use('/api/cargroups', require('./routes/carGroupRoutes'));
+app.use('/api/cars', require('./routes/cars'));
+app.use('/api/reservations', require('./routes/reservations'));
+app.use('/api/invoices', require('./routes/invoices'));
+app.use('/api/reviews', require('./routes/reviews'));
+app.use('/api/chat', require('./routes/chat'));
+app.use('/api/branches', require('./routes/branch'));
+app.use('/api/coupons', require('./routes/coupons'));
+app.use('/api/statistics', require('./routes/statistics'));
+app.use('/api/contact', require('./routes/contact'));
 
-// Sample test route
+// Default route
 app.get('/', (req, res) => {
   res.send('🚀 Backend is running and connected to MongoDB!');
 });
 
+// 404 fallback
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error('Unhandled Error:', err.stack);
+  res.status(500).json({ message: 'Internal Server Error', error: err.message });
+});
+
+// WebSocket handling
 io.on('connection', (socket) => {
   console.log('✅ User connected:', socket.id);
 
   socket.on('chatMessage', async ({ sender, receiver, message }) => {
     io.to(receiver).emit('chatMessage', { sender, message });
 
-    // ✅ Save the message to MongoDB
     try {
       const ChatMessage = require('./models/ChatMessage');
       await ChatMessage.create({ sender, receiver, message });
@@ -67,33 +86,11 @@ io.on('connection', (socket) => {
   });
 });
 
-
-// Server Listening
+// Start the server
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`🌐 Server running on port ${PORT}`);
 });
 
-const carGroupRoutes = require('./routes/carGroupRoutes');
-app.use('/api/cargroups', carGroupRoutes);
-
-const carRoutes = require('./routes/cars');
-app.use('/api/cars', carRoutes);
-
-const reservationRoutes = require('./routes/reservations');
-app.use('/api/reservations', reservationRoutes);
-
 const invoiceRoutes = require('./routes/invoices');
 app.use('/api/invoices', invoiceRoutes);
-
-const reviewRoutes = require('./routes/reviews');
-app.use('/api/reviews', reviewRoutes);
-
-const chatRoutes = require('./routes/chat');
-app.use('/api/chat', chatRoutes);
-
-const branchRoutes = require('./routes/branch');
-app.use('/api/branches', branchRoutes);
-
-const couponRoutes = require('./routes/coupons');
-app.use('/api/coupons', couponRoutes);
